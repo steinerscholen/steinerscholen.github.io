@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naamkaartje · Steinerscholen</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    header .logo svg { color: #6366f1; }
+    header a.gh {
+      font-size: .8rem;
+      color: #64748b;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: .35rem .75rem;
+      transition: background .15s;
+    }
+    header a.gh:hover { background: #f1f5f9; }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 3.5rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 2rem;
+    }
+    /* Mini badge mockup */
+    .badge-mock {
+      width: 90px;
+      height: 48px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      flex-shrink: 0;
+    }
+    .badge-mock .strip {
+      height: 11px;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      font-size: 4px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: .2px;
+    }
+    .badge-mock .body {
+      background: #fff;
+      height: calc(100% - 11px);
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+    }
+    .badge-mock .photo {
+      width: 20px;
+      background: #e5e7eb;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .badge-mock .lines {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      justify-content: center;
+    }
+    .badge-mock .line { background: #cbd5e1; border-radius: 2px; height: 3px; }
+    .badge-mock .line.bold { background: #94a3b8; height: 4px; width: 38px; }
+    .badge-mock .line.short { width: 24px; }
+    .badge-mock .line.xshort { width: 18px; }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: #6366f1; }
+    .hero p {
+      font-size: 1.05rem;
+      color: #475569;
+      line-height: 1.65;
+      margin-bottom: 2rem;
+    }
+    .hero .cta {
+      display: inline-block;
+      background: #6366f1;
+      color: #fff;
+      text-decoration: none;
+      padding: .9rem 2.2rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 4px 14px rgba(99,102,241,.35);
+      transition: background .15s, transform .1s;
+    }
+    .hero .cta:hover { background: #4f46e5; transform: translateY(-1px); }
+    .privacy-note {
+      margin-top: 1rem;
+      font-size: .8rem;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .4rem;
+    }
+
+    /* ── Features ── */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+    .feature {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 1.4rem;
+    }
+    .feature .icon {
+      font-size: 1.6rem;
+      margin-bottom: .6rem;
+    }
+    .feature h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: .35rem;
+    }
+    .feature p {
+      font-size: .85rem;
+      color: #64748b;
+      line-height: 1.55;
+    }
+
+    /* ── How-to ── */
+    .howto {
+      background: #fff;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 3.5rem 2rem;
+    }
+    .howto-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .howto h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #ede9fe;
+      color: #6366f1;
+      font-size: .8rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+    .step-body h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: .2rem;
+    }
+    .step-body p {
+      font-size: .85rem;
+      color: #64748b;
+      line-height: 1.55;
+    }
+    .step-body code {
+      background: #f1f5f9;
+      border-radius: 4px;
+      padding: .1rem .35rem;
+      font-size: .82rem;
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      color: #6366f1;
+    }
+
+    /* ── Presets table ── */
+    .presets {
+      max-width: 720px;
+      margin: 3.5rem auto;
+      padding: 0 2rem;
+    }
+    .presets h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .85rem;
+    }
+    th {
+      text-align: left;
+      padding: .5rem .75rem;
+      background: #f8fafc;
+      border-bottom: 2px solid #e2e8f0;
+      color: #64748b;
+      font-weight: 600;
+    }
+    td {
+      padding: .55rem .75rem;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: auto;
+      border-top: 1px solid #e2e8f0;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: .8rem;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+    }
+    footer a { color: #94a3b8; }
+    footer a:hover { color: #64748b; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .badge-row .badge-mock:nth-child(n+3) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <rect x="2" y="4" width="16" height="12" rx="2"/>
+      <path d="M6 4v12M2 8h4"/>
+    </svg>
+    Naamkaartje
+  </div>
+  <a class="gh" href="https://github.com/steinerscholen/naamkaart" target="_blank" rel="noopener">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.532 1.03 1.532 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.742 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+    </svg>
+    GitHub
+  </a>
+</header>
+
+<section class="hero">
+  <div class="badge-row">
+    <div class="badge-mock">
+      <div class="strip" style="background:#d97706">MSV Gent</div>
+      <div class="body"><div class="photo"></div><div class="lines"><div class="line bold"></div><div class="line short"></div><div class="line xshort"></div></div></div>
+    </div>
+    <div class="badge-mock">
+      <div class="strip" style="background:#16a34a">MSV Gent</div>
+      <div class="body"><div class="photo"></div><div class="lines"><div class="line bold"></div><div class="line short"></div><div class="line xshort"></div></div></div>
+    </div>
+    <div class="badge-mock">
+      <div class="strip" style="background:#6366f1">MSV Gent</div>
+      <div class="body"><div class="photo" style="background:none"></div><div class="lines" style="gap:5px;justify-content:center"><div class="line bold" style="height:6px;width:44px;background:#334155"></div><div class="line short" style="background:#6366f1;width:30px"></div></div></div>
+    </div>
+  </div>
+
+  <h1>Badge­stickers voor<br><span>Steiner­scholen</span></h1>
+  <p>
+    Importeer je leerlingenlijst, koppel foto's, en druk stickervellen af in elk Avery- of Herma-formaat.
+    Geen account, geen server — alles blijft op jouw toestel.
+  </p>
+  <a class="cta" href="https://steinerscholen.github.io/naamkaart/" target="_blank" rel="noopener">
+    Open Naamkaartje →
+  </a>
+  <p class="privacy-note">
+    <svg width="13" height="13" viewBox="0 0 20 20" fill="#94a3b8"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"/></svg>
+    Foto's en namen worden nooit verstuurd naar een server
+  </p>
+</section>
+
+<section class="features">
+  <div class="feature">
+    <div class="icon">🎓</div>
+    <h3>Leerlingenbadges</h3>
+    <p>Importeer een Smartschool CSV, koppel portretfoto's en genereer een PDF op maat van jouw stickervel.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">🚲</div>
+    <h3>Fietspas</h3>
+    <p>Markeer leerlingen die een schoolfiets mogen lenen. Zelfde badge, andere kleur — één klik.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">🪪</div>
+    <h3>Naamkaartjes</h3>
+    <p>Grote, leesbare naamkaartjes voor evenementen en ouderavonden. 10 per A4, 90 × 55 mm.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">🎨</div>
+    <h3>Volledig aanpasbaar</h3>
+    <p>Schoolnaam, logo, kleuren, eigen lettertype (TTF) en het formaat van het stickervel zijn vrij instelbaar.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">🔒</div>
+    <h3>Privacy by design</h3>
+    <p>Geen account, geen cloud. Alle data — foto's, namen, CSV's — blijft lokaal op jouw toestel.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">📄</div>
+    <h3>Slim veldbeheer</h3>
+    <p>De app houdt bij welke stickers al gebruikt zijn. Zo verspil je nooit een gedeeltelijk vel.</p>
+  </div>
+</section>
+
+<section class="howto">
+  <div class="howto-inner">
+    <h2>Hoe gebruik je het?</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Open de app</h4>
+          <p>Klik op de knop hierboven. De app werkt rechtstreeks in je browser — geen installatie nodig.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Stel je school in</h4>
+          <p>Ga naar <strong>Instellingen</strong> en vul je schoolnaam, website, schooljaar en logo in. Kies je accentkleur en het formaat van je stickervel.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Importeer leerlingen</h4>
+          <p>Exporteer een CSV uit Smartschool en importeer die via <strong>Leerlingen → CSV importeren</strong>. UTF-8 en Windows-1252 worden automatisch herkend.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Koppel foto's</h4>
+          <p>Gebruik <strong>Foto's koppelen</strong> om een map met portretfoto's te importeren. De app koppelt ze automatisch op basis van de bestandsnaam.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>Druk af</h4>
+          <p>Selecteer leerlingen in het tabblad <strong>Afdrukken</strong>, kies nieuw of bestaand vel, en klik op <strong>PDF genereren</strong>. Het bestand wordt meteen gedownload.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">✦</div>
+        <div class="step-body">
+          <h4>Lokaal draaien (voor IT-beheerders)</h4>
+          <p>
+            Installeer <a href="https://nodejs.org" target="_blank" rel="noopener">Node.js</a>, clone de repo en start de app:
+            <br><br>
+            <code>git clone https://github.com/steinerscholen/naamkaart.git</code><br>
+            <code>cd naamkaart &amp;&amp; npm install &amp;&amp; npm run dev</code>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="presets">
+  <h2>Ondersteunde stickervellen</h2>
+  <table>
+    <thead>
+      <tr><th>Formaat</th><th>Afmeting</th><th>Raster</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Avery 3475 / Zweckform 3422</td><td>70 × 37 mm</td><td>3 × 8 = 24</td></tr>
+      <tr><td>Avery L7160 / J8160</td><td>63,5 × 38,1 mm</td><td>3 × 7 = 21</td></tr>
+      <tr><td>Avery 3666</td><td>65 × 33,9 mm</td><td>3 × 9 = 27</td></tr>
+      <tr><td>Avery L4736</td><td>63,5 × 25,4 mm</td><td>4 × 12 = 48</td></tr>
+      <tr><td>Herma 4201</td><td>70 × 42,3 mm</td><td>3 × 7 = 21</td></tr>
+      <tr><td>Herma 4200</td><td>105 × 42,3 mm</td><td>2 × 7 = 14</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <!-- Belfort van Gent -->
+  <svg width="10" height="16" viewBox="0 0 10 16" fill="#94a3b8">
+    <rect x="0" y="0" width="2" height="3"/>
+    <rect x="3" y="0" width="2" height="3"/>
+    <rect x="6" y="0" width="2" height="3"/>
+    <rect x="9" y="0" width="1" height="3"/>
+    <rect x="1" y="3" width="8" height="9"/>
+    <rect x="3" y="5" width="4" height="3" fill="white" opacity="0.35"/>
+    <rect x="3" y="12" width="4" height="4"/>
+  </svg>
+  Made in Gent by <a href="https://github.com/tngvndrm" target="_blank" rel="noopener">tngvndrm</a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/steinerscholen/naamkaart" target="_blank" rel="noopener">Open source op GitHub</a>
+  &nbsp;·&nbsp;
+  MIT Licentie
+</footer>
+
+</body>
+</html>

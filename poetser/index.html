@@ -62,38 +62,60 @@
     .hero {
       text-align: center;
       padding: 5rem 2rem 3.5rem;
-      max-width: 640px;
+      max-width: 680px;
       margin: 0 auto;
     }
 
-    .wip-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      background: #fef3c7;
-      color: #92400e;
-      border: 1px solid #fde68a;
-      border-radius: 99px;
-      padding: .35rem 1rem;
-      font-size: .8rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
+    /* Mini schedule mockup */
+    .schedule-mock {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 2rem;
     }
-    .wip-badge .dot {
+    .week-card {
+      width: 72px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      flex-shrink: 0;
+      font-size: 0;
+    }
+    .week-card .wk-header {
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: .3px;
+    }
+    .week-card .wk-body {
+      background: #fff;
+      padding: 5px 5px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .week-card .wk-row {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+    .week-card .wk-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #f59e0b;
-      animation: pulse 1.8s ease-in-out infinite;
+      flex-shrink: 0;
     }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: .5; transform: scale(.75); }
+    .week-card .wk-line {
+      height: 3px;
+      border-radius: 2px;
+      background: #e2e8f0;
+      flex: 1;
     }
-
-    .hero-icon { font-size: 3.5rem; line-height: 1; margin-bottom: 1.5rem; }
 
     .hero h1 {
       font-size: 2.4rem;
@@ -116,23 +138,32 @@
       background: #f59e0b;
       color: #fff;
       text-decoration: none;
-      padding: .85rem 2rem;
+      padding: .9rem 2.2rem;
       border-radius: 12px;
       font-weight: 700;
       font-size: 1rem;
-      box-shadow: 0 4px 14px rgba(245,158,11,.3);
+      box-shadow: 0 4px 14px rgba(245,158,11,.35);
       transition: background .15s, transform .1s;
     }
     .hero .cta:hover { background: #d97706; transform: translateY(-1px); }
+    .privacy-note {
+      margin-top: 1rem;
+      font-size: .8rem;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .4rem;
+    }
 
     /* ── Features ── */
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1rem;
-      max-width: 820px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 0 2rem 5rem;
+      padding: 0 2rem 4rem;
     }
     .feature {
       background: #fff;
@@ -144,23 +175,42 @@
     .feature h3 { font-size: .95rem; font-weight: 700; margin-bottom: .35rem; }
     .feature p { font-size: .85rem; color: #64748b; line-height: 1.55; }
 
-    /* ── Status banner ── */
-    .status {
-      background: #fffbeb;
-      border-top: 1px solid #fde68a;
-      border-bottom: 1px solid #fde68a;
-      padding: 2rem;
-      text-align: center;
-      margin-bottom: 4rem;
+    /* ── How-to ── */
+    .howto {
+      background: #fff;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 3.5rem 2rem;
     }
-    .status p {
-      font-size: .9rem;
-      color: #78350f;
-      line-height: 1.6;
-      max-width: 540px;
-      margin: 0 auto;
+    .howto-inner { max-width: 720px; margin: 0 auto; }
+    .howto h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 2rem; text-align: center; }
+    .steps { display: flex; flex-direction: column; gap: 1.2rem; }
+    .step { display: flex; gap: 1rem; align-items: flex-start; }
+    .step-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #fef3c7; color: #d97706;
+      font-size: .8rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: .1rem;
     }
-    .status a { color: #d97706; font-weight: 600; }
+    .step-body h4 { font-size: .95rem; font-weight: 700; margin-bottom: .2rem; }
+    .step-body p { font-size: .85rem; color: #64748b; line-height: 1.55; }
+    .step-body code {
+      background: #f1f5f9; border-radius: 4px; padding: .1rem .35rem;
+      font-size: .82rem; font-family: 'SFMono-Regular', Consolas, monospace; color: #d97706;
+    }
+
+    /* ── Distribution methods table ── */
+    .methods { max-width: 720px; margin: 3.5rem auto; padding: 0 2rem; }
+    .methods h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 1.2rem; text-align: center; }
+    table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    th {
+      text-align: left; padding: .5rem .75rem;
+      background: #f8fafc; border-bottom: 2px solid #e2e8f0;
+      color: #64748b; font-weight: 600;
+    }
+    td { padding: .55rem .75rem; border-bottom: 1px solid #f1f5f9; color: #334155; }
+    tr:last-child td { border-bottom: none; }
 
     /* ── Footer ── */
     footer {
@@ -180,6 +230,7 @@
 
     @media (max-width: 600px) {
       .hero h1 { font-size: 1.8rem; }
+      .schedule-mock .week-card:nth-child(n+3) { display: none; }
     }
   </style>
 </head>
@@ -199,11 +250,33 @@
 </header>
 
 <section class="hero">
-  <div class="wip-badge">
-    <span class="dot"></span>
-    In ontwikkeling
+  <div class="schedule-mock">
+    <div class="week-card">
+      <div class="wk-header" style="background:#d97706">Week 36</div>
+      <div class="wk-body">
+        <div class="wk-row"><div class="wk-dot" style="background:#fbbf24"></div><div class="wk-line" style="width:38px"></div></div>
+        <div class="wk-row"><div class="wk-dot" style="background:#e5e7eb"></div><div class="wk-line" style="width:28px"></div></div>
+        <div class="wk-row"><div class="wk-dot" style="background:#e5e7eb"></div><div class="wk-line" style="width:32px"></div></div>
+      </div>
+    </div>
+    <div class="week-card">
+      <div class="wk-header" style="background:#b45309">Week 40</div>
+      <div class="wk-body">
+        <div class="wk-row"><div class="wk-dot" style="background:#e5e7eb"></div><div class="wk-line" style="width:32px"></div></div>
+        <div class="wk-row"><div class="wk-dot" style="background:#fbbf24"></div><div class="wk-line" style="width:38px"></div></div>
+        <div class="wk-row"><div class="wk-dot" style="background:#e5e7eb"></div><div class="wk-line" style="width:26px"></div></div>
+      </div>
+    </div>
+    <div class="week-card">
+      <div class="wk-header" style="background:#92400e">Week 44</div>
+      <div class="wk-body">
+        <div class="wk-row"><div class="wk-dot" style="background:#e5e7eb"></div><div class="wk-line" style="width:28px"></div></div>
+        <div class="wk-row"><div class="wk-dot" style="background:#e5e7eb"></div><div class="wk-line" style="width:36px"></div></div>
+        <div class="wk-row"><div class="wk-dot" style="background:#fbbf24"></div><div class="wk-line" style="width:38px"></div></div>
+      </div>
+    </div>
   </div>
-  <div class="hero-icon">🧹</div>
+
   <h1>Week­end­poets­beurten<br><span>eerlijk verdeeld</span></h1>
   <p>
     Aan het begin van het schooljaar ontvangt elke ouder een overzicht van de weekends waarop ze de klas van hun kind poetsen.
@@ -213,8 +286,12 @@
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
       <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.532 1.03 1.532 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.742 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
     </svg>
-    Bekijk op GitHub
+    Open Poetser →
   </a>
+  <p class="privacy-note">
+    <svg width="13" height="13" viewBox="0 0 20 20" fill="#94a3b8"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"/></svg>
+    Leerlingengegevens worden nooit verstuurd naar een server
+  </p>
 </section>
 
 <section class="features">
@@ -238,14 +315,93 @@
     <h3>Overzicht per ouder</h3>
     <p>Elke ouder krijgt een persoonlijk overzicht van hun beurt(en) voor het volledige schooljaar.</p>
   </div>
+  <div class="feature">
+    <div class="icon">📅</div>
+    <h3>Vrije weekends</h3>
+    <p>Schoolvakanties en feestdagen worden automatisch uitgesloten. Je kan ook manueel weekends blokkeren.</p>
+  </div>
+  <div class="feature">
+    <div class="icon">🔒</div>
+    <h3>Privacy by design</h3>
+    <p>Geen account, geen cloud. Alle data — namen, klassen, roosters — blijft lokaal op jouw toestel.</p>
+  </div>
 </section>
 
-<div class="status">
-  <p>
-    Poetser is momenteel in actieve ontwikkeling. Volg de voortgang op
-    <a href="https://github.com/steinerscholen/poetser" target="_blank" rel="noopener">github.com/steinerscholen/poetser</a>.
-  </p>
-</div>
+<section class="howto">
+  <div class="howto-inner">
+    <h2>Hoe gebruik je het?</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Open de app</h4>
+          <p>Klik op de knop hierboven. De app werkt rechtstreeks in je browser — geen installatie nodig.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Stel het schooljaar in</h4>
+          <p>Geef de start- en einddatum van het schooljaar op. Schoolvakanties worden automatisch herkend en uitgesloten van het rooster.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Importeer leerlingen</h4>
+          <p>Laad een CSV-bestand in met de leerlingenlijst van je klas. De app groepeert leerlingen automatisch per gezin op basis van het adres of de familienaam.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Kies de verdeelmethode</h4>
+          <p>Selecteer <strong>Strikte roulatie</strong> voor een vaste beurt per gezin, of <strong>Gewogen verdeling</strong> om gezinnen met meerdere kinderen licht te begunstigen.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>Genereer het rooster</h4>
+          <p>Klik op <strong>Rooster genereren</strong>. Je ziet meteen een overzicht per weekend én per gezin. Pas eventueel manueel aan en sla op.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h4>Exporteer en verstuur</h4>
+          <p>Download een PDF of CSV per klas. Elk gezin krijgt een persoonlijk overzichtje dat je per e-mail of via Smartschool kan doorsturen.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">✦</div>
+        <div class="step-body">
+          <h4>Lokaal draaien (voor IT-beheerders)</h4>
+          <p>
+            Installeer <a href="https://nodejs.org" target="_blank" rel="noopener">Node.js</a>, clone de repo en start de app:
+            <br><br>
+            <code>git clone https://github.com/steinerscholen/poetser.git</code><br>
+            <code>cd poetser &amp;&amp; npm install &amp;&amp; npm run dev</code>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="methods">
+  <h2>Verdeelmethoden</h2>
+  <table>
+    <thead>
+      <tr><th>Methode</th><th>Hoe het werkt</th><th>Geschikt voor</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Strikte roulatie</td><td>Elk gezin komt exact één keer aan de beurt per cyclus</td><td>Klassen met een gelijkmatige gezinsgrootte</td></tr>
+      <tr><td>Gewogen verdeling</td><td>Gezinnen met meer kinderen op school poetsen iets vaker</td><td>Klassen met grote variatie in gezinsgrootte</td></tr>
+      <tr><td>Handmatige aanpassing</td><td>Sleep en herorden beurten vrij in de kalenderweergave</td><td>Uitzonderingen en speciale afspraken</td></tr>
+    </tbody>
+  </table>
+</section>
 
 <footer>
   <svg width="10" height="16" viewBox="0 0 10 16" fill="#94a3b8">
@@ -259,7 +415,7 @@
   </svg>
   Made in Gent by <a href="https://github.com/tngvndrm" target="_blank" rel="noopener">tngvndrm</a>
   &nbsp;·&nbsp;
-  <a href="https://github.com/steinerscholen" target="_blank" rel="noopener">Open source op GitHub</a>
+  <a href="https://github.com/steinerscholen/poetser" target="_blank" rel="noopener">Open source op GitHub</a>
   &nbsp;·&nbsp;
   MIT Licentie
 </footer>
